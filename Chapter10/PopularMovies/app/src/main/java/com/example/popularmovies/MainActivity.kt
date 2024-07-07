@@ -84,7 +84,7 @@ fun MainScreen(
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            val movies = viewModel.poupularMovies.collectAsState()
+            val movies = viewModel.popularMovies.collectAsState()
             LazyVerticalGrid(columns = GridCells.Fixed(2)) {
                 items(movies.value) { movie ->
                     MovieItemView(movie = movie) {

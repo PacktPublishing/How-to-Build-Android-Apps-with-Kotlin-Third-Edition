@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
     private val _popularMovies = MutableStateFlow(emptyList<Movie>())
-    val poupularMovies = _popularMovies.asStateFlow()
+    val popularMovies = _popularMovies.asStateFlow()
 
     private val _error = MutableStateFlow("")
     val error = _error.asStateFlow()

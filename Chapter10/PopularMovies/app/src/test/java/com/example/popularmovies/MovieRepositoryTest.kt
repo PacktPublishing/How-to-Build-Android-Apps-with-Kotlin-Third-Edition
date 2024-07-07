@@ -19,7 +19,7 @@ class MovieRepositoryTest {
     lateinit var movieService: MovieService
 
     @Test
-    fun fetchMovies() {
+    fun getPopularMovies() {
         val movies = listOf(
             Movie(
                 title = "Title",
