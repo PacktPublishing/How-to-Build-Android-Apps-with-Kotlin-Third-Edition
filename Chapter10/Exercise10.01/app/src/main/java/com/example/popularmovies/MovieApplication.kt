@@ -10,7 +10,11 @@ class MovieApplication : Application() {
         MovieService(apiKey = apiKey)
     }
 
-    val movieRepository: MovieRepository by lazy {
-        MovieRepository(movieService = movieService)
+    lateinit var movieRepository: MovieRepository
+
+    override fun onCreate() {
+        super.onCreate()
+
+        movieRepository = MovieRepository(movieService = movieService)
     }
 }

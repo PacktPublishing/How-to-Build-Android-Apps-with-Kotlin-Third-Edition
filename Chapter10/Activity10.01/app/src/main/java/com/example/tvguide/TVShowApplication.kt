@@ -10,7 +10,11 @@ class TVShowApplication : Application() {
         TVShowService(apiKey = apiKey)
     }
 
-    val tvShowRepository: TVShowRepository by lazy {
-        TVShowRepository(tvShowService = tvShowService)
+    lateinit var tvShowRepository: TVShowRepository
+
+    override fun onCreate() {
+        super.onCreate()
+
+        tvShowRepository = TVShowRepository(tvShowService = tvShowService)
     }
 }
