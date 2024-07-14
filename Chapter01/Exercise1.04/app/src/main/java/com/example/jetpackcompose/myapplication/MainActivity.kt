@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         TopAppBar(
-                            title = { Text("Top Bar Title") },
+                            title = { Text("My Application") },
                             colors = TopAppBarDefaults.topAppBarColors(
                                 containerColor = Pink80,
                                 titleContentColor = Purple40
