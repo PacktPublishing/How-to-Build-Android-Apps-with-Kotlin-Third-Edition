@@ -62,20 +62,19 @@ fun ColorCreatorScreen() {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = redChannel,
-            onValueChange = { redChannel = it },
+            onValueChange = { redChannel = filterHexInput(it) },
             label = { Text("Red Channel") }
-
         )
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = greenChannel,
-            onValueChange = { greenChannel = it },
+            onValueChange = { greenChannel = filterHexInput(it) },
             label = { Text("Green Channel") }
         )
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = blueChannel,
-            onValueChange = { blueChannel = it },
+            onValueChange = { blueChannel = filterHexInput(it) },
             label = { Text("Blue Channel") }
         )
         Button(
