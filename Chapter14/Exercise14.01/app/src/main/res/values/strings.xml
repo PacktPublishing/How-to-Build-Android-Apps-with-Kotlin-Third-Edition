@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+
+    <string name="back">Back</string>
+
+    <string name="movie_overview">Overview: %s</string>
+    <string name="movie_poster">Movie Poster</string>
+</resources>
