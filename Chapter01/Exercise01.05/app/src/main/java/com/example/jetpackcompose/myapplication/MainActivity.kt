@@ -21,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.myapplication.ui.theme.MyApplicationTheme
@@ -39,8 +40,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     var firstName by remember { mutableStateOf("") }
-    var surname by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
     var fullName by remember { mutableStateOf("") }
+
+    var welcomeMessage = stringResource(id = R.string.welcome_to_the_app)
+    var enterNameErrorMessage = stringResource(id = R.string.please_enter_a_name)
 
     val context = LocalContext.current
 
@@ -55,32 +59,33 @@ fun MainScreen() {
             modifier = Modifier.fillMaxWidth(),
             value = firstName,
             onValueChange = { firstName = it },
-            label = { Text("First Name") },
+            label = { Text(text = stringResource(id = R.string.first_name)) },
         )
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = surname,
-            onValueChange = { surname = it },
-            label = { Text("Surname") }
+            value = lastName,
+            onValueChange = { lastName = it },
+            label = { Text(text = stringResource(id = R.string.last_name)) }
         )
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                if (firstName.isNotEmpty() && surname.isNotEmpty())
-                    fullName = "Welcome to the App $firstName $surname!"
+                if (firstName.isNotBlank() && lastName.isNotBlank())
+                    fullName = "$firstName $lastName"
                 else {
-                    Toast.makeText(context, "Please enter a full name!", Toast.LENGTH_LONG)
+                    Toast.makeText(context, enterNameErrorMessage, Toast.LENGTH_LONG)
                         .apply {
                             setGravity(Gravity.CENTER, 0, 0)
                             show()
                         }
+                    fullName = ""
                 }
             }
         ) {
-            Text("Submit")
+            Text("Enter")
         }
         if (fullName.isNotEmpty()) {
-            Text(text = fullName)
+            Text(text = "$welcomeMessage $fullName!")
         }
     }
 }

@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.myapplication.ui.theme.MyApplicationTheme
@@ -43,6 +44,8 @@ fun ColorCreatorScreen() {
     var greenChannel by remember { mutableStateOf("") }
     var blueChannel by remember { mutableStateOf("") }
     var colorToDisplay by remember { mutableStateOf(ComposeColor.White) }
+
+
 
     val context = LocalContext.current
 
@@ -86,8 +89,7 @@ fun ColorCreatorScreen() {
                 // Check that all fields are filled in and show error message if not.
                 if (redText.isEmpty() || greenText.isEmpty() || blueText.isEmpty()) {
                     Toast.makeText(context, "All Values are required", Toast.LENGTH_LONG).show()
-                }
-                else {
+                } else {
                     // check that 2 hexadecimal characters have been entered and if not add the same hexadecimal character again.
                     val red = if (redText.length == 1) redText + redText else redText
                     val green = if (greenText.length == 1) greenText + greenText else greenText
@@ -101,19 +103,13 @@ fun ColorCreatorScreen() {
                     }
                 }
             }) {
-            Text("Create Color")
+            Text(stringResource(id = R.string.create_rgb_color))
         }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(40.dp)
-                .background(colorToDisplay),
-                contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Created color display panel"
-            )
-        }
+
+        Text(
+            modifier = Modifier.background(colorToDisplay).padding(24.dp),
+            text = "Created color display panel"
+        )
     }
 }
 
