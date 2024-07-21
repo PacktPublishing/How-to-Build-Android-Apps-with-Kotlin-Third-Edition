@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="create_rgb_color">Create RGB Color</string>
 </resources>
