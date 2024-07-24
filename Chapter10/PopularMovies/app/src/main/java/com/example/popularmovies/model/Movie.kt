@@ -1,14 +1,17 @@
 package com.example.popularmovies.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Entity(tableName = "movies")
 @Serializable
 data class Movie(
     val adult: Boolean = false,
     @SerialName("backdrop_path")
     val backdropPath: String = "",
-    val id: Int = 0,
+    @PrimaryKey val id: Int = 0,
     @SerialName("original_language")
     val originalLanguage: String = "",
     @SerialName("original_title")
