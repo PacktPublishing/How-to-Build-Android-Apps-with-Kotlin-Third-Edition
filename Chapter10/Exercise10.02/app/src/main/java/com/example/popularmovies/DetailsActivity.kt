@@ -118,7 +118,9 @@ fun DetailsView(
         Text(
             text = overview,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .fillMaxWidth()
         )
     }
 }
