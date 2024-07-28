@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Exercise11.02</string>
+    <string name="click_me">Click Me</string>
+    <string name="total_count">Total count %s</string>
+</resources>
