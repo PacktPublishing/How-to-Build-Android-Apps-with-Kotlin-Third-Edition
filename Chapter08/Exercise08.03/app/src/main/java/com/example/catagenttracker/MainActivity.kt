@@ -12,6 +12,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -29,6 +30,7 @@ import androidx.core.content.ContextCompat
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.example.catagenttracker.ui.theme.CatAgentTrackerTheme
@@ -49,6 +51,10 @@ class MainActivity : ComponentActivity() {
                 mutableStateOf(null)
             }
 
+            fun cancelTracking() {
+                trackingWorkId?.let(workManager::cancelWorkById)
+            }
+
             val requestPermissionLauncher =
                 rememberLauncherForActivityResult(
                     contract = RequestPermission(),
@@ -63,18 +69,28 @@ class MainActivity : ComponentActivity() {
 
             CatAgentTrackerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Button(
-                        onClick = {
-                            if (isNotificationPermitted()) {
-                                trackingWorkId = startTracking("Agent007")
-                            } else {
-                                requestPermissionLauncher
-                                    .launch(POST_NOTIFICATIONS)
-                            }
-                        },
-                        modifier = Modifier.padding(innerPadding)
-                    ) {
-                        Text(text = "Start")
+                    Column {
+                        Button(
+                            onClick = {
+                                if (isNotificationPermitted()) {
+                                    trackingWorkId = startTracking("Agent007")
+                                } else {
+                                    requestPermissionLauncher
+                                        .launch(POST_NOTIFICATIONS)
+                                }
+                            },
+                            modifier = Modifier.padding(innerPadding)
+                        ) {
+                            Text(text = "Start")
+                        }
+                        Button(
+                            onClick = {
+                                cancelTracking()
+                            },
+                            modifier = Modifier.padding(innerPadding)
+                        ) {
+                            Text(text = "Cancel")
+                        }
                     }
                 }
             }
@@ -98,9 +114,13 @@ class MainActivity : ComponentActivity() {
     ) {
         workManager.getWorkInfoByIdFlow(requestId)
             .collect { info ->
-                if (info.state.isFinished) {
+                if (info.state == WorkInfo.State.SUCCEEDED) {
                     Toast.makeText(
                         this, "Agent arrived!", LENGTH_SHORT
+                    ).show()
+                } else if (info.state == WorkInfo.State.CANCELLED) {
+                    Toast.makeText(
+                        this, "Deployment cancelled!", LENGTH_SHORT
                     ).show()
                 } else if (info.progress != Data.EMPTY) {
                     val catAgentId = info.progress
