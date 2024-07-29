@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Water Tracker</string>
+    <string name="channel_name_water_tracking">Water Tracking</string>
+    <string name="label_water_balance">Water balance: %1$.3f</string>
+    <string name="button_label_start">Start</string>
+    <string name="button_label_drank_glass">Drank a glass of water</string>
+    <string name="button_label_stop">Stop</string>
+    <string name="permission_rationale_dialog_title">Permission needed</string>
+    <string name="permission_rationale_dialog_text">We need permission to show you a notification with your water balance.</string>
+    <string name="permission_rationale_dialog_confirm_button_label">Confirm</string>
+</resources>
