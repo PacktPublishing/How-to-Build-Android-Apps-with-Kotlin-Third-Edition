@@ -62,30 +62,6 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
-//            val lifecycleOwner = LocalLifecycleOwner.current
-//            DisposableEffect(
-//                key1 = lifecycleOwner,
-//                effect = {
-//                    val observer = LifecycleEventObserver { _, event ->
-//                        if (event == Lifecycle.Event.ON_START) {
-//                            if (!locationPermissionsGranted) {
-//                                shouldShowLocationPermissionRationale =
-//                                    shouldShowRequestLocationPermissionRationale()
-//                            }
-//                            if (!locationPermissionsGranted &&
-//                                !shouldShowLocationPermissionRationale
-//                            ) {
-//                                requestLocationPermission()
-//                            }
-//                        }
-//                    }
-//                    lifecycleOwner.lifecycle.addObserver(observer)
-//                    onDispose {
-//                        lifecycleOwner.lifecycle.removeObserver(observer)
-//                    }
-//                }
-//            )
-
             CatAgentDeployerTheme {
 
                 val snackbarHostState = remember { SnackbarHostState() }
@@ -112,11 +88,6 @@ class MainActivity : ComponentActivity() {
                     ) {
                         Text(text = "Request permission")
                     }
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier
-//                            .padding(innerPadding)
-//                    )
 
                     val scope = rememberCoroutineScope()
 
