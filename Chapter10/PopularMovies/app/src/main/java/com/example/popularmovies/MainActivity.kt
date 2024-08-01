@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.popularmovies.model.Movie
 import com.example.popularmovies.ui.MovieItemView
@@ -85,7 +86,7 @@ fun MainScreen(
                 .fillMaxSize()
         ) {
             val movies = viewModel.popularMovies.collectAsState()
-            LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+            LazyVerticalGrid(columns = GridCells.Adaptive(160.dp)) {
                 items(movies.value) { movie ->
                     MovieItemView(movie = movie) {
                         onSelectMovie(movie)
