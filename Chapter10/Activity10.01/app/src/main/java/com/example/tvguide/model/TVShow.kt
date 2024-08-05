@@ -18,7 +18,7 @@ data class TVShow(
     val overview: String = "",
     val popularity: Float = 0f,
     @SerialName("poster_path")
-    val posterPath: String = "",
+    val posterPath: String? = "",
     @SerialName("vote_average")
     val voteAverage: Float = 0f,
     @SerialName("vote_count")
