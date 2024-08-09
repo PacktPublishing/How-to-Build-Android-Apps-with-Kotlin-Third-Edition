@@ -43,9 +43,8 @@ fun MainScreen() {
     var lastName by remember { mutableStateOf("") }
     var fullName by remember { mutableStateOf("") }
 
-    var welcomeMessage = stringResource(id = R.string.welcome_to_the_app)
-    var enterNameErrorMessage = stringResource(id = R.string.please_enter_a_name)
-
+    val welcomeMessage = stringResource(id = R.string.welcome_to_the_app)
+    val enterNameErrorMessage = stringResource(id = R.string.please_enter_a_name)
     val context = LocalContext.current
 
     Column(
