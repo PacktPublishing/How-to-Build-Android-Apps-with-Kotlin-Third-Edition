@@ -9,10 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.tvguide.R
 import com.example.tvguide.model.TVShow
 import com.example.tvguide.ui.theme.TVGuideTheme
 
@@ -23,13 +25,16 @@ fun TVShowItemView(
     onClick: (TVShow) -> Unit
 ) {
     Column(
-        modifier = modifier.clickable { onClick(tvShow) },
+        modifier = modifier
+            .padding(top = 16.dp)
+            .clickable { onClick(tvShow) },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
             model = "https://image.tmdb.org/t/p/w500/${tvShow.posterPath}",
             contentDescription = tvShow.name,
             contentScale = ContentScale.Fit,
+            placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
             modifier = Modifier.height(240.dp)
         )
         Text(
