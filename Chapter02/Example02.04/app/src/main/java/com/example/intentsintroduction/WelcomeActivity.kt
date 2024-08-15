@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,13 +39,11 @@ class WelcomeActivity : ComponentActivity() {
                         if (intent != null) {
                             val fullName = intent.getStringExtra(FULL_NAME_KEY)
                             Text(
+                                textAlign = TextAlign.Center,
                                 text = getString(R.string.welcome_text, fullName),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .padding(12.dp)
-                                    .fillMaxSize()
-                                    .fillMaxHeight()
+                                modifier = Modifier.padding(12.dp)
                             )
                         }
                     }
