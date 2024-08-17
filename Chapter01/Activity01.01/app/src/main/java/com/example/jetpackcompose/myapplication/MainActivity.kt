@@ -45,8 +45,6 @@ fun ColorCreatorScreen() {
     var blueChannel by remember { mutableStateOf("") }
     var colorToDisplay by remember { mutableStateOf(ComposeColor.White) }
 
-
-
     val context = LocalContext.current
 
     // Function to filter input to only allow hexadecimal characters

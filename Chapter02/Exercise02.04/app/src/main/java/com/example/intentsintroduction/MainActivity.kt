@@ -1,5 +1,6 @@
 package com.example.intentsintroduction
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -40,56 +41,63 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            var fullName by remember { mutableStateOf("") }
-            val context = LocalContext.current
-            val welcomeIntent = Intent(this, WelcomeActivity::class.java)
-
             IntentsIntroductionTheme {
-                Scaffold(
-                    topBar = {
-                        TopAppBar(
-                            title = { Text(stringResource(R.string.app_name)) }
+                MainScreen()
+            }
+        }
+    }
+
+    @Composable
+    @OptIn(ExperimentalMaterial3Api::class)
+    private fun MainScreen() {
+
+        var fullName by remember { mutableStateOf("") }
+        val context = LocalContext.current
+        val welcomeIntent = Intent(this, WelcomeActivity::class.java)
+
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(stringResource(R.string.app_name)) }
+                )
+            }, modifier = Modifier.fillMaxSize()
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxWidth()
+            ) {
+                OutlinedTextField(
+                    value = fullName,
+                    onValueChange = { fullName = it },
+                    label = {
+                        Text(
+                            fontSize = 18.sp,
+                            text = stringResource(id = R.string.full_name_label)
                         )
-                    }, modifier = Modifier.fillMaxSize()
-                ) { innerPadding ->
-                    Column(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .fillMaxWidth()
-                    ) {
-                        OutlinedTextField(
-                            value = fullName,
-                            onValueChange = { fullName = it },
-                            label = {
-                                Text(
-                                    fontSize = 18.sp,
-                                    text = stringResource(id = R.string.full_name_label)
-                                )
-                            },
-                            textStyle = TextStyle(fontSize = 20.sp), // Set custom font size here
-                            modifier = Modifier
-                                .padding(12.dp)
-                                .fillMaxWidth()
-                        )
-                        Button(
-                            onClick = ({
-                                if (fullName.isNotEmpty()) {
-                                    welcomeIntent.putExtra(FULL_NAME_KEY, fullName)
-                                    startActivity(welcomeIntent)
-                                } else {
-                                    Toast.makeText(
-                                        context, getString(R.string.full_name_label),
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                            }),
-                            modifier = Modifier
-                                .padding(12.dp)
-                                .fillMaxWidth()
-                        ) {
-                            Text(text = stringResource(R.string.submit_button_text))
+                    },
+                    textStyle = TextStyle(fontSize = 20.sp), // Set custom font size here
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .fillMaxWidth()
+                )
+                Button(
+                    onClick = ({
+                        if (fullName.isNotEmpty()) {
+                            welcomeIntent.putExtra(FULL_NAME_KEY, fullName)
+                            startActivity(welcomeIntent)
+                        } else {
+                            Toast.makeText(
+                                context, getString(R.string.full_name_label),
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
-                    }
+                    }),
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .fillMaxWidth()
+                ) {
+                    Text(text = stringResource(R.string.submit_button_text))
                 }
             }
         }

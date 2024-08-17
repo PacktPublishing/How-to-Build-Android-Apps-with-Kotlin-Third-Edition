@@ -13,5 +13,5 @@
     <string name="indigo">INDIGO</string>
     <string name="violet">VIOLET</string>
     <string name="unexpected_color">Unexpected color</string>
-    <string name="title_activity_rainbow_color_picker">RainbowColorPickerActivity</string>
+    <string name="title_activity_color_picker">ColorPickerActivity</string>
 </resources>

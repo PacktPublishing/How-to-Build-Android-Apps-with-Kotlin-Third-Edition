@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Launch Modes</string>
+    <string name="standard_launch_mode">Launch Standard</string>
+    <string name="single_top_launch_mode">Launch Single Top</string>
+    <string name="title_activity_standard">StandardActivity</string>
+    <string name="title_activity_single_top">SingleTopActivity</string>
+    <string name="back_text">Go Back</string>
+
+</resources>
