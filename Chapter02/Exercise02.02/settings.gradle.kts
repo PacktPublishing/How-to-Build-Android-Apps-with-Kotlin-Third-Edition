@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Save and Restore"
 include(":app")
- 
