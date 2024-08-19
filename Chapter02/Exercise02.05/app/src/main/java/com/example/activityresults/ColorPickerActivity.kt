@@ -1,5 +1,6 @@
 package com.example.activityresults
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -58,15 +59,34 @@ class ColorPickerActivity : ComponentActivity() {
                         .padding(20.dp)
                         .fillMaxWidth()
                 )
-                RainbowColor(0xFFFF0000L, getString(R.string.red), clickHandler)
-                RainbowColor(0xFFFFA500L, getString(R.string.orange), clickHandler)
-                RainbowColor(0xFFFFEE00L, getString(R.string.yellow), clickHandler)
-                RainbowColor(0xFF00FF00L, getString(R.string.green), clickHandler)
-                RainbowColor(0xFF0000FFL, getString(R.string.blue), clickHandler)
-                RainbowColor(0xFF4B0082L, getString(R.string.indigo), clickHandler)
-                RainbowColor(0xFF8A2BE2L, getString(R.string.violet), clickHandler)
+                RainbowColor(red, getString(R.string.red), clickHandler)
+                RainbowColor(orange, getString(R.string.orange), clickHandler)
+                RainbowColor(yellow, getString(R.string.yellow), clickHandler)
+                RainbowColor(green, getString(R.string.green), clickHandler)
+                RainbowColor(blue, getString(R.string.blue), clickHandler)
+                RainbowColor(indigo, getString(R.string.indigo), clickHandler)
+                RainbowColor(violet, getString(R.string.violet), clickHandler)
+                Text(
+                    stringResource(id = R.string.footer_text_picker),
+                    textAlign = TextAlign.Center,
+                    fontSize = 18.sp,
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .fillMaxWidth()
+                )
             }
         }
+    }
+
+    companion object {
+        private const val red = 0xFFFF0000L
+        private const val orange = 0xFFFFA500L
+        private const val yellow = 0xFFFFEE00L
+        private const val green = 0xFF00FF00L
+        private const val blue = 0xFF0000FFL
+        private const val indigo = 0xFF4B0082L
+        private const val violet = 0xFF8A2BE2L
+
     }
 
     private fun setRainbowColor(color: Long, colorName: String) {
