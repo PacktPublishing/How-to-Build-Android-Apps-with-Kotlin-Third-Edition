@@ -44,20 +44,26 @@ private fun MainScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(innerPadding)
         ) {
+            Text(
+                stringResource(id = R.string.standard_title),
+                fontSize = 28.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
             Button(
                 onClick = {
                     context.startActivity(Intent(context, StandardActivity::class.java))
                 },
                 modifier = Modifier
-                    .padding(20.dp)
+                    .padding(16.dp)
+                    .fillMaxWidth()
             ) {
                 Text(
                     stringResource(id = R.string.standard_launch_mode),
-                    fontSize = 28.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+                    fontSize = 28.sp
                 )
             }
+
             Button(
                 onClick = {
                     (context as ComponentActivity).finish()
