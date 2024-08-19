@@ -13,22 +13,21 @@
         android:theme="@style/Theme.LaunchModes"
         tools:targetApi="31">
         <activity
-            android:name=".SingleTopActivity"
-            android:exported="false"
-            android:label="@string/title_activity_single_top"
-            android:launchMode="singleTop"
-            android:theme="@style/Theme.LaunchModes" />
-        <activity
             android:name=".StandardActivity"
             android:exported="false"
             android:label="@string/title_activity_standard"
             android:launchMode="standard"
             android:theme="@style/Theme.LaunchModes" />
         <activity
+            android:name=".SingleTopActivity"
+            android:exported="false"
+            android:label="@string/title_activity_single_top"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.LaunchModes" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:launchMode="singleTop"
             android:theme="@style/Theme.LaunchModes">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
