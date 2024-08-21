@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,63 +52,66 @@ fun ColorCreatorScreen() {
     fun filterHexInput(input: String): String {
         return input.filter { it in '0'..'9' || it in 'A'..'F' || it in 'a'..'f' }.take(2)
     }
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text("Add two hexadecimal characters between 0-9, A-F or a-f without the '#' for each channel")
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = redChannel,
-            onValueChange = { redChannel = filterHexInput(it) },
-            label = { Text("Red Channel") }
-        )
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = greenChannel,
-            onValueChange = { greenChannel = filterHexInput(it) },
-            label = { Text("Green Channel") }
-        )
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = blueChannel,
-            onValueChange = { blueChannel = filterHexInput(it) },
-            label = { Text("Blue Channel") }
-        )
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {
-                val redText = redChannel
-                val greenText = greenChannel
-                val blueText = blueChannel
-                // Check that all fields are filled in and show error message if not.
-                if (redText.isEmpty() || greenText.isEmpty() || blueText.isEmpty()) {
-                    Toast.makeText(context, "All Values are required", Toast.LENGTH_LONG).show()
-                } else {
-                    // check that 2 hexadecimal characters have been entered and if not add the same hexadecimal character again.
-                    val red = if (redText.length == 1) redText + redText else redText
-                    val green = if (greenText.length == 1) greenText + greenText else greenText
-                    val blue = if (blueText.length == 1) blueText + blueText else blueText
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(16.dp)
+        ) {
+            Text("Add two hexadecimal characters between 0-9, A-F or a-f without the '#' for each channel")
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = redChannel,
+                onValueChange = { redChannel = filterHexInput(it) },
+                label = { Text("Red Channel") }
+            )
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = greenChannel,
+                onValueChange = { greenChannel = filterHexInput(it) },
+                label = { Text("Green Channel") }
+            )
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = blueChannel,
+                onValueChange = { blueChannel = filterHexInput(it) },
+                label = { Text("Blue Channel") }
+            )
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    val redText = redChannel
+                    val greenText = greenChannel
+                    val blueText = blueChannel
+                    // Check that all fields are filled in and show error message if not.
+                    if (redText.isEmpty() || greenText.isEmpty() || blueText.isEmpty()) {
+                        Toast.makeText(context, "All Values are required", Toast.LENGTH_LONG).show()
+                    } else {
+                        // check that 2 hexadecimal characters have been entered and if not add the same hexadecimal character again.
+                        val red = if (redText.length == 1) redText + redText else redText
+                        val green = if (greenText.length == 1) greenText + greenText else greenText
+                        val blue = if (blueText.length == 1) blueText + blueText else blueText
 
-                    val colorString = "#$red$green$blue"
-                    colorToDisplay = try {
-                        ComposeColor(android.graphics.Color.parseColor(colorString))
-                    } catch (e: IllegalArgumentException) {
-                        ComposeColor.White
+                        val colorString = "#$red$green$blue"
+                        colorToDisplay = try {
+                            ComposeColor(android.graphics.Color.parseColor(colorString))
+                        } catch (e: IllegalArgumentException) {
+                            ComposeColor.White
+                        }
                     }
-                }
-            }) {
-            Text(stringResource(id = R.string.create_rgb_color))
-        }
+                }) {
+                Text(stringResource(id = R.string.create_rgb_color))
+            }
 
-        Text(
-            modifier = Modifier.background(colorToDisplay).padding(24.dp),
-            text = "Created color display panel"
-        )
+            Text(
+                modifier = Modifier.background(colorToDisplay).padding(24.dp),
+                text = "Created color display panel"
+            )
+        }
     }
 }
 
