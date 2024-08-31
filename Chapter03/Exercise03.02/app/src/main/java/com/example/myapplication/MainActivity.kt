@@ -42,9 +42,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(modifier: Modifier) {
-
     var counter = remember { mutableStateOf(0) }
-
     Column(
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -55,13 +53,11 @@ fun MainScreen(modifier: Modifier) {
             fontSize = 44.sp,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
-
         Text(
             text = counter.value.toString(),
             fontSize = 54.sp,
             fontWeight = FontWeight.Bold,
         )
-
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
@@ -89,7 +85,6 @@ fun MainScreen(modifier: Modifier) {
                     fontWeight = FontWeight.Bold,
                 )
             }
-
         }
     }
 }
