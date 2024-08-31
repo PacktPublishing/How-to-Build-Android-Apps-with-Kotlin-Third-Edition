@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             SettingsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SettingsTitle()
+                    SettingsHeader()
                 }
             }
         }
@@ -55,7 +55,7 @@ fun GreetingPreview() {
 }
 
 @Composable
-fun SettingsTitle() {
+fun SettingsHeader() {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -80,5 +80,5 @@ fun SettingsTitle() {
 @Preview
 @Composable
 fun SettingsTitlePreview() {
-    SettingsTitle()
+    SettingsHeader()
 }
