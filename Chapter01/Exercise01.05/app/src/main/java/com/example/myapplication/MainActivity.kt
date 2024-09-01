@@ -75,22 +75,15 @@ private fun MainScreen() {
                     if (firstName.isNotBlank() && lastName.isNotBlank())
                         fullName = "$firstName $lastName"
                     else {
-                        Toast.makeText(
-                            context,
-                            enterNameErrorMessage,
-                            Toast.LENGTH_LONG
-                        )
-                            .apply {
-                                setGravity(Gravity.CENTER, 0, 0)
-                                show()
-                            }
-                        fullName = ""
+                        val toast = Toast.makeText(context, enterNameErrorMessage, Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
                     }
                 }
             ) {
                 Text("Enter")
             }
-            if (fullName.isNotEmpty()) {
+            if (fullName.isNotBlank()) {
                 Text(text = "$welcomeMessage $fullName!")
             }
         }

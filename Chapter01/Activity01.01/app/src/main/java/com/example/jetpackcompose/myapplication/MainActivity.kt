@@ -6,11 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -66,42 +64,35 @@ fun ColorCreatorScreen() {
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = redChannel,
-                onValueChange = { redChannel = filterHexInput(it) },
+                onValueChange = { redChannel = it },
                 label = { Text("Red Channel") }
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = greenChannel,
-                onValueChange = { greenChannel = filterHexInput(it) },
+                onValueChange = { greenChannel = it },
                 label = { Text("Green Channel") }
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = blueChannel,
-                onValueChange = { blueChannel = filterHexInput(it) },
+                onValueChange = { blueChannel = it },
                 label = { Text("Blue Channel") }
             )
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    val redText = redChannel
-                    val greenText = greenChannel
-                    val blueText = blueChannel
-                    // Check that all fields are filled in and show error message if not.
-                    if (redText.isEmpty() || greenText.isEmpty() || blueText.isEmpty()) {
-                        Toast.makeText(context, "All Values are required", Toast.LENGTH_LONG).show()
-                    } else {
-                        // check that 2 hexadecimal characters have been entered and if not add the same hexadecimal character again.
-                        val red = if (redText.length == 1) redText + redText else redText
-                        val green = if (greenText.length == 1) greenText + greenText else greenText
-                        val blue = if (blueText.length == 1) blueText + blueText else blueText
-
-                        val colorString = "#$red$green$blue"
+                    // Check that all fields are filled in correctly and show error message if not.
+                    if (isValidHexInput(redChannel) && isValidHexInput(greenChannel) && isValidHexInput(blueChannel)) {
+                        val colorString = "#$redChannel$greenChannel$blueChannel"
                         colorToDisplay = try {
                             ComposeColor(android.graphics.Color.parseColor(colorString))
                         } catch (e: IllegalArgumentException) {
                             ComposeColor.White
                         }
+
+                    } else {
+                        Toast.makeText(context, "Input text is invalid", Toast.LENGTH_LONG).show()
                     }
                 }) {
                 Text(stringResource(id = R.string.create_rgb_color))
@@ -113,6 +104,10 @@ fun ColorCreatorScreen() {
             )
         }
     }
+}
+
+fun isValidHexInput(input: String): Boolean {
+    return input.filter { it in '0'..'9' || it in 'A'..'F' || it in 'a'..'f' }.length == 2
 }
 
 @Preview(showBackground = true)
