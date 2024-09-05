@@ -10,5 +10,6 @@
     <string name="alert_message">Alaert Message</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="favourite_color_label">Favourite color:</string>
     <string name="settings_profile_image">Profile Image</string>
 </resources>
