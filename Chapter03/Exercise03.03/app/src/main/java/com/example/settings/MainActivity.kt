@@ -78,7 +78,7 @@ fun SettingsContainer(modifier: Modifier = Modifier) {
         // Radio Buttons
         SettingsRadioButton()
         // Sign Out Button
-        SignOutButton()
+        AlertDialog()
     }
 }
 
@@ -219,7 +219,7 @@ fun SettingsProgressBars() {
 }
 
 @Composable
-fun SignOutButton() {
+fun AlertDialog() {
     var showDialog by remember { mutableStateOf(false) }
 
     Button(onClick = { showDialog = true }) {
@@ -249,8 +249,10 @@ fun SignOutButton() {
 fun SettingsRadioButton() {
     var selectedColor by remember { mutableStateOf("Red") }
 
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Text(text = "Choose a color:", modifier = Modifier.padding(bottom = 8.dp))
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp)) {
+        Text(text = stringResource(id = R.string.favourite_color_label), modifier = Modifier.padding(bottom = 8.dp))
         listOf("Red", "Green", "Blue").forEach { color ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
