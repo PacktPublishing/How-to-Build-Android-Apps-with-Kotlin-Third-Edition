@@ -20,6 +20,8 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
@@ -73,6 +75,8 @@ fun SettingsContainer(modifier: Modifier = Modifier) {
         SettingsSlider()
         // Progress bars
         SettingsProgressBars()
+        // Radio Buttons
+        SettingsRadioButton()
         // Sign Out Button
         SignOutButton()
     }
@@ -125,6 +129,8 @@ fun SettingsImage() {
 
 @Composable
 fun SettingsCheckbox() {
+    var isChecked by remember { mutableStateOf(false) }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -137,8 +143,8 @@ fun SettingsCheckbox() {
             fontSize = 18.sp,
         )
         Checkbox(
-            checked = false,
-            onCheckedChange = {},
+            checked = isChecked,
+            onCheckedChange = { isChecked = it },
             modifier = Modifier.padding(start = 100.dp, end = 4.dp)
         )
     }
@@ -146,6 +152,8 @@ fun SettingsCheckbox() {
 
 @Composable
 fun SettingsSwitch() {
+    var isSwitched by remember { mutableStateOf(false) }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -158,8 +166,8 @@ fun SettingsSwitch() {
             fontSize = 18.sp,
         )
         Switch(
-            checked = false,
-            onCheckedChange = {},
+            checked = isSwitched,
+            onCheckedChange = { isSwitched = it },
             modifier = Modifier.padding(start = 100.dp, end = 12.dp)
         )
     }
@@ -167,6 +175,8 @@ fun SettingsSwitch() {
 
 @Composable
 fun SettingsSlider() {
+    var sliderValue by remember { mutableStateOf(0f) }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -178,7 +188,11 @@ fun SettingsSlider() {
             modifier = Modifier.padding(start = 16.dp),
             fontSize = 18.sp,
         )
-        Slider(value = 0f, onValueChange = {}, modifier = Modifier.padding(start = 100.dp, end = 6.dp))
+        Slider(
+            value = sliderValue,
+            onValueChange = { sliderValue = it },
+            modifier = Modifier.padding(start = 100.dp, end = 6.dp)
+        )
     }
 }
 
@@ -228,6 +242,28 @@ fun SignOutButton() {
                 }
             }
         )
+    }
+}
+
+@Composable
+fun SettingsRadioButton() {
+    var selectedColor by remember { mutableStateOf("Red") }
+
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(text = "Choose a color:", modifier = Modifier.padding(bottom = 8.dp))
+        listOf("Red", "Green", "Blue").forEach { color ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(vertical = 4.dp)
+            ) {
+                RadioButton(
+                    selected = (color == selectedColor),
+                    onClick = { selectedColor = color },
+                    colors = RadioButtonDefaults.colors()
+                )
+                Text(text = color, modifier = Modifier.padding(start = 8.dp))
+            }
+        }
     }
 }
 
