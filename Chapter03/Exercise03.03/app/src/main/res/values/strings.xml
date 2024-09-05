@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Settings</string>
     <string name="settings_icon_description">Settings</string>
+    <string name="settings_consent">Accept non-essential cookies?</string>
+    <string name="settings_mobile_streaming">Stream using mobile data?</string>
+    <string name="settings_brightness">Display brightness:</string>
+    <string name="settings_name">Name:</string>
+    <string name="show_alert_dialog">Show Alert Dialog</string>
+    <string name="alert_title">Alert Title</string>
+    <string name="alert_message">Alaert Message</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="settings_profile_image">Profile Image</string>
 </resources>
