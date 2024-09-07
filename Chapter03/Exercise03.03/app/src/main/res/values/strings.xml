@@ -5,11 +5,11 @@
     <string name="settings_mobile_streaming">Stream using mobile data?</string>
     <string name="settings_brightness">Display brightness:</string>
     <string name="settings_name">Name:</string>
-    <string name="show_alert_dialog">Show Alert Dialog</string>
-    <string name="alert_title">Alert Title</string>
-    <string name="alert_message">Alaert Message</string>
+    <string name="sign_out">Sign out</string>
+    <string name="alert_title">Sign out</string>
+    <string name="alert_message">Are you sure?</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="favourite_color_label">Favourite color:</string>
+    <string name="payment_method">Preferred payment method</string>
     <string name="settings_profile_image">Profile Image</string>
 </resources>
