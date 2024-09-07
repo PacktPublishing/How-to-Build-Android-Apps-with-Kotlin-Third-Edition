@@ -5,21 +5,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
@@ -73,13 +72,17 @@ fun SettingsContainer(modifier: Modifier = Modifier) {
         SettingsSwitch()
         // App Brightness
         SettingsSlider()
-        // Progress bars
-        SettingsProgressBars()
         // Radio Buttons
         SettingsRadioButton()
         // Sign Out Button
         AlertDialog()
     }
+}
+
+@Preview
+@Composable
+fun SettingsContainerPreview() {
+    SettingsContainer()
 }
 
 @Composable
@@ -94,13 +97,11 @@ fun SettingsHeader() {
         Text(
             text = stringResource(id = R.string.app_name),
             style = HeaderTextStyle,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(start = 16.dp, end = 12.dp),
+            modifier = Modifier.padding(end = 10.dp)
         )
         Icon(
             imageVector = Icons.Default.Settings,
             contentDescription = stringResource(id = R.string.settings_icon_description),
-            modifier = Modifier.padding(end = 12.dp)
         )
     }
 }
@@ -110,19 +111,20 @@ fun SettingsImage() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp).padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = stringResource(id = R.string.settings_profile_image),
-            modifier = Modifier.padding(start = 16.dp),
             fontSize = 18.sp,
         )
         Image(
-            painter = painterResource(id = android.R.drawable.ic_menu_camera),
+            modifier = Modifier.padding(end = 10.dp).height(34.dp)
+                .clickable { /* Handle changing the profile image */ },
+            painter = painterResource(id = R.drawable.sunflower),
             contentDescription = stringResource(id = R.string.settings_profile_image),
-            modifier = Modifier.padding(end = 6.dp)
+
         )
     }
 }
@@ -134,18 +136,17 @@ fun SettingsCheckbox() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp).padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = stringResource(id = R.string.settings_consent),
-            modifier = Modifier.padding(start = 16.dp),
             fontSize = 18.sp,
         )
         Checkbox(
             checked = isChecked,
             onCheckedChange = { isChecked = it },
-            modifier = Modifier.padding(start = 100.dp, end = 4.dp)
         )
     }
 }
@@ -157,18 +158,17 @@ fun SettingsSwitch() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp).padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = stringResource(id = R.string.settings_mobile_streaming),
-            modifier = Modifier.padding(start = 16.dp),
             fontSize = 18.sp,
         )
         Switch(
             checked = isSwitched,
             onCheckedChange = { isSwitched = it },
-            modifier = Modifier.padding(start = 100.dp, end = 12.dp)
         )
     }
 }
@@ -180,40 +180,18 @@ fun SettingsSlider() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp).padding(start = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = stringResource(id = R.string.settings_brightness),
-            modifier = Modifier.padding(start = 16.dp),
             fontSize = 18.sp,
         )
         Slider(
             value = sliderValue,
             onValueChange = { sliderValue = it },
-            modifier = Modifier.padding(start = 100.dp, end = 6.dp)
-        )
-    }
-}
-
-@Composable
-fun SettingsProgressBars() {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        // Spinner Progress Bar
-        CircularProgressIndicator(
-            modifier = Modifier.padding(16.dp)
-        )
-        // Linear Progress Bar
-        LinearProgressIndicator(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+            modifier = Modifier.padding(start = 6.dp)
         )
     }
 }
@@ -223,7 +201,7 @@ fun AlertDialog() {
     var showDialog by remember { mutableStateOf(false) }
 
     Button(onClick = { showDialog = true }) {
-        Text(text = stringResource(id = R.string.show_alert_dialog))
+        Text(text = stringResource(id = R.string.sign_out))
     }
 
     if (showDialog) {
@@ -252,8 +230,8 @@ fun SettingsRadioButton() {
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
-        Text(text = stringResource(id = R.string.favourite_color_label), modifier = Modifier.padding(bottom = 8.dp))
-        listOf("Red", "Green", "Blue").forEach { color ->
+        Text(text = stringResource(id = R.string.payment_method), modifier = Modifier.padding(bottom = 8.dp))
+        listOf("Paypal", "Credit Card", "Bak Transfer").forEach { color ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(vertical = 4.dp)
@@ -267,10 +245,4 @@ fun SettingsRadioButton() {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun SettingsContainerPreview() {
-    SettingsContainer()
 }

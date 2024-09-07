@@ -62,5 +62,5 @@ fun SettingsTheme(
 
 val HeaderTextStyle = TextStyle(
     fontSize = 28.sp,
-    fontWeight = FontWeight.Bold
+    fontWeight = FontWeight.ExtraBold
 )
