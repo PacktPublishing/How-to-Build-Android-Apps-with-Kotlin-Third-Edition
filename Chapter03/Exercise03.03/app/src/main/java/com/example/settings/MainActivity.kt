@@ -34,7 +34,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -153,7 +152,7 @@ fun SettingsCheckbox() {
 
 @Composable
 fun SettingsSwitch() {
-    var isSwitched by remember { mutableStateOf(false) }
+    var isChecked by remember { mutableStateOf(false) }
 
     Row(
         modifier = Modifier
@@ -163,12 +162,13 @@ fun SettingsSwitch() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = stringResource(id = R.string.settings_mobile_streaming),
+            text = stringResource(id = R.string.settings_mobile_data),
             fontSize = 18.sp,
         )
         Switch(
-            checked = isSwitched,
-            onCheckedChange = { isSwitched = it },
+            modifier = Modifier.padding(end = 10.dp),
+            checked = isChecked,
+            onCheckedChange = { isChecked = it },
         )
     }
 }
@@ -185,13 +185,14 @@ fun SettingsSlider() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = stringResource(id = R.string.settings_brightness),
+            modifier = Modifier.padding(end = 16.dp),
+            text = stringResource(id = R.string.settings_text_size),
             fontSize = 18.sp,
         )
         Slider(
             value = sliderValue,
             onValueChange = { sliderValue = it },
-            modifier = Modifier.padding(start = 6.dp)
+            steps = 2
         )
     }
 }
