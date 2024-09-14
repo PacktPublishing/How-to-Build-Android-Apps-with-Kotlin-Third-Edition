@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -63,19 +62,16 @@ fun ProfileCard(modifier: Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(16.dp)
         ) {
-            Box(
+
+            Image(
+                painter = painterResource(id = R.drawable.cat), // Replace with your image resource
+                contentDescription = "Profile Picture",
+                contentScale = ContentScale.Inside,
                 modifier = Modifier
+                    .padding(16.dp)
                     .size(100.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.cat), // Replace with your image resource
-                    contentDescription = "Profile Picture",
-                    contentScale = ContentScale.Inside,
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(RoundedCornerShape(50.dp))
-                )
-            }
+                    .clip(RoundedCornerShape(50.dp))
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
