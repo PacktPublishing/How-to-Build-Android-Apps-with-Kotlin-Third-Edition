@@ -14,6 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.AbstractSavedStateViewModelFactory
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.packt.android.ui.theme.Exercise1102Theme
 
@@ -33,7 +37,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Main(
-    totalViewModel: TotalViewModel = viewModel(),
+    totalViewModel: TotalViewModel = viewModel(factory =object: AbstractSavedStateViewModelFactory(){
+        override fun <T : ViewModel> create(
+            key: String,
+            modelClass: Class<T>,
+            handle: SavedStateHandle
+        ): T {
+            return MyViewModel(handle) as T
+        }
+
+    }),
     modifier: Modifier
 ) {
     MainScreen(modifier = modifier,

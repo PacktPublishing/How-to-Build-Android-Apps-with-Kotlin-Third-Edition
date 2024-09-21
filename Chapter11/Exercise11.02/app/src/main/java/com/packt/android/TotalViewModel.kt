@@ -1,6 +1,7 @@
 package com.packt.android
 
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,4 +29,18 @@ class TotalViewModel : ViewModel() {
         val result: Int = 0,
         val textColor: Color = Color.Blue
     )
+}
+
+private const val MY_KEY = "my_key"
+
+class MyViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
+
+    var myValue: String = ""
+        set(value) {
+            field = value
+            savedStateHandle[MY_KEY] = value
+        }
+        get() {
+            return savedStateHandle.get<String>(MY_KEY).toString()
+        }
 }

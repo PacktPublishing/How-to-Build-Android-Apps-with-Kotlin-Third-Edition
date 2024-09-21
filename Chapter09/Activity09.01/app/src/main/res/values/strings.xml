@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Activity09.01</string>
+    <string name="item_x">Item %s</string>
+    <string name="clicked_item_x">Clicked Item %s</string>
+    <string name="press_me">Press Me</string>
 </resources>
