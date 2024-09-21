@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Settings</string>
+    <string name="settings_icon_description">Settings</string>
+    <string name="settings_consent">Accept non-essential cookies?</string>
+    <string name="settings_mobile_data">Download using mobile data?</string>
+    <string name="settings_text_size">Text size:</string>
+    <string name="settings_name">Name:</string>
+    <string name="sign_out">Sign out</string>
+    <string name="alert_title">Sign out</string>
+    <string name="alert_message">Are you sure?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="payment_method">Preferred payment method</string>
+    <string name="settings_profile_image">Profile Image</string>
+</resources>

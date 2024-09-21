@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Counter Views Activity</string>
+    <string name="zero">0</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="counter_text">Counter</string>
+</resources>
