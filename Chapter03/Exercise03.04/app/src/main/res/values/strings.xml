@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Profile</string>
+    <string name="top_bar">Profile Card</string>
+    <string name="bottom_bar">Bottom Bar</string>
 </resources>
