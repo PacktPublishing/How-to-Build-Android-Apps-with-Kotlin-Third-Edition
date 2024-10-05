@@ -1,3 +1,12 @@
 Chapter 4
 
  and finally finishing by looking at Scaffold which is a high-level layout group which enables building a skeletal app layout structure to display top and bottom bars and body content simplifying creating an app’s UI.
+
+
+Add a Navigation Drawer to this Project using routes a nav host and navigation and add the following screens:
+
+Home
+Recent
+Favorites
+Archive
+Bin
