@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,14 +18,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,7 +47,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProfileTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ProfileCard(modifier = Modifier.padding(innerPadding))
+                    Profile(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -50,7 +55,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ProfileCard(modifier: Modifier) {
+fun Profile(modifier: Modifier) {
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -61,20 +66,27 @@ fun ProfileCard(modifier: Modifier) {
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
-            Box(
-                modifier = Modifier
-                    .size(100.dp)
-            ) {
+            Box (modifier = Modifier.size(110.dp)) {
                 Image(
                     painter = painterResource(id = R.drawable.cat), // Replace with your image resource
                     contentDescription = "Profile Picture",
                     contentScale = ContentScale.Inside,
                     modifier = Modifier
+                        .padding(16.dp)
                         .size(100.dp)
                         .clip(RoundedCornerShape(50.dp))
                 )
+                    Card(
+                        onClick = {/**/},
+                        modifier = Modifier.align(BottomEnd), border = BorderStroke(1.dp, SolidColor(Color.Blue))) {
+                        Text(text = "Edit", modifier = Modifier.padding(horizontal = 4.dp),
+                            fontSize = 12.sp)
+
+                    }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -113,8 +125,8 @@ fun ProfileCard(modifier: Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun ProfileCardPreview() {
-    ProfileCard(modifier = Modifier.padding(20.dp))
+fun ProfilePreview() {
+    Profile(modifier = Modifier.padding(20.dp))
 }
 
 @Composable
