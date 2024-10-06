@@ -83,21 +83,6 @@ fun HomeScreen(navController: NavController) {
     }
 }
 
-@Composable
-fun RedScreen(navController: NavController) {
-    ColorScreen(navController, "Red", Color.Red)
-}
-
-@Composable
-fun GreenScreen(navController: NavController) {
-    ColorScreen(navController, "Green", Color.Green)
-}
-
-@Composable
-fun BlueScreen(navController: NavController) {
-    ColorScreen(navController, "Blue", Color.Blue)
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ColorScreen(navController: NavController, title: String, color: Color) {
