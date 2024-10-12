@@ -31,18 +31,20 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun NavigationApp() {
-    val navController = rememberNavController()
+    val navHostController = rememberNavController()
     NavHost(
-        navController = navController,
-        startDestination = "home"
-    ) {
-        composable("home") {
-            HomeScreen(navController)
-        }
-        composable("detail") {
-            DetailScreen(navController)
-        }
-    }
+        navController = navHostController,
+        startDestination = "home",
+        builder = (
+                {
+                    composable("home") {
+                        HomeScreen(navHostController)
+                    }
+                    composable("detail") {
+                        DetailScreen(navHostController)
+                    }
+                })
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -4,10 +4,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
-sealed class NavigationItem(var route: String, var icon: ImageVector, var title: String) {
-    data object Home : NavigationItem("home", Icons.Default.Home, "Home")
-    data object Shopping : NavigationItem("recent", Icons.Default.ShoppingCart, "Cart")
-    data object Favorites : NavigationItem("favorites", Icons.Default.Favorite, "Favorites")
-    data object Calendar : NavigationItem("archive", Icons.Default.DateRange, "Calendar")
-    data object Bin : NavigationItem("bin", Icons.Default.Delete, "Bin")
+sealed class NavigationItem(val route: String, val icon: ImageVector) {
+    object Home : NavigationItem("Home", Icons.Default.Home)
+    object Shopping : NavigationItem("Cart", Icons.Default.ShoppingCart)
+    object Favorites : NavigationItem("Favorites", Icons.Default.Favorite)
+    object Calendar : NavigationItem("Calendar", Icons.Default.DateRange)
+    object Bin : NavigationItem("Bin", Icons.Default.Delete)
 }

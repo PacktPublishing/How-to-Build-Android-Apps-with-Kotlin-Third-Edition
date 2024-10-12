@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -35,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -65,7 +65,6 @@ fun MainScreen() {
     val navController = rememberNavController()
     val currentScreenTitle = remember { mutableStateOf("") }
 
-    // Update the screen title based on the current destination
     navController.addOnDestinationChangedListener { _, destination, _ ->
         currentScreenTitle.value = when (destination.route) {
             NavigationItem.Home.route -> "Home"
@@ -77,10 +76,9 @@ fun MainScreen() {
         }
     }
 
-    // Ensure ModalNavigationDrawer and its content fills the available space
     ModalNavigationDrawer(
         drawerState = drawerState,
-        modifier = Modifier.fillMaxSize(), // Use fillMaxSize() to prevent size issues
+        modifier = Modifier.fillMaxSize(),
         drawerContent = {
             DrawerContent(navController, drawerState, scope)
         },
@@ -121,34 +119,16 @@ fun DrawerContent(
     drawerState: DrawerState,
     scope: CoroutineScope
 ) {
-    val items = listOf(
-        NavigationItem.Home,
-        NavigationItem.Shopping,
-        NavigationItem.Favorites,
-        NavigationItem.Calendar,
-        NavigationItem.Bin
-    )
-
-    val currentDestination = getCurrentRoute(navController) ?: Color.LightGray
-
-
     Column(
         modifier = Modifier.background(Color.White)
     ) {
-
-        val home = NavigationItem.Home
-        val shopping = NavigationItem.Shopping
-        val favourites = NavigationItem.Favorites
-        val calendar = NavigationItem.Calendar
-        val bin = NavigationItem.Bin
-
-        Box( contentAlignment = Alignment.Center) {
+        Box(contentAlignment = Alignment.Center) {
             Image(
                 modifier = Modifier.width(220.dp),
                 painter = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = "Logo",
 
-            )
+                )
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = "Logo",
@@ -157,149 +137,83 @@ fun DrawerContent(
             )
         }
 
-        Box(Modifier.background(if (currentDestination == "home") Color.LightGray else Color.White).width(220.dp)) {
+        NavDrawerItem(
+            NavigationItem.Home.route,
+            scope,
+            navController,
+            NavigationItem.Home,
+            drawerState
+        )
+        NavDrawerItem(
+            NavigationItem.Shopping.route,
+            scope,
+            navController,
+            NavigationItem.Shopping,
+            drawerState
+        )
+        NavDrawerItem(
+            NavigationItem.Favorites.route,
+            scope,
+            navController,
+            NavigationItem.Favorites,
+            drawerState
+        )
+        NavDrawerItem(
+            NavigationItem.Calendar.route,
+            scope,
+            navController,
+            NavigationItem.Calendar,
+            drawerState
+        )
+        NavDrawerItem(
+            NavigationItem.Bin.route,
+            scope,
+            navController,
+            NavigationItem.Bin,
+            drawerState
+        )
+    }
+}
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .clickable {
-                        scope.launch {
-                            navController.navigate(home.route) {
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                            drawerState.close()
+@Composable
+private fun NavDrawerItem(
+    route: String,
+    scope: CoroutineScope,
+    navController: NavHostController,
+    navigationItem: NavigationItem,
+    drawerState: DrawerState
+) {
+    val currentRoute = getCurrentRoute(navController)
+
+    Box(
+        Modifier
+            .background(if (currentRoute == route) Color.LightGray else Color.White)
+            .width(220.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .clickable {
+                    scope.launch {
+                        navController.navigate(navigationItem.route) {
+                            launchSingleTop = true
+                            restoreState = true
                         }
+                        drawerState.close()
                     }
+                }
 
-            ) {
-                Icon(
-                    imageVector = home.icon,
-                    contentDescription = home.title,
-                    modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp)
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = home.title,
-                    modifier = Modifier.padding(end = 16.dp)
-                )
-            }
-        }
-
-        Box(Modifier.background(if (currentDestination == "shopping") Color.LightGray else Color.White).width(220.dp)) {
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .clickable {
-                        scope.launch {
-                            navController.navigate(shopping.route) {
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                            drawerState.close()
-                        }
-                    }
-
-            ) {
-                Icon(
-                    imageVector = shopping.icon,
-                    contentDescription = home.title,
-                    modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp)
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = shopping.title,
-                    modifier = Modifier.padding(end = 16.dp)
-                )
-            }
-        }
-
-        Box(Modifier.background(if (currentDestination == "favorites") Color.LightGray else Color.White).width(220.dp)) {
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .clickable {
-                        scope.launch {
-                            navController.navigate(favourites.route) {
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                            drawerState.close()
-                        }
-                    }
-
-            ) {
-                Icon(
-                    imageVector = favourites.icon,
-                    contentDescription = favourites.title,
-                    modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp)
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = favourites.title,
-                    modifier = Modifier.padding(end = 16.dp)
-                )
-            }
-        }
-
-        Box(Modifier.background(if (currentDestination == "calendar") Color.LightGray else Color.White).width(220.dp)) {
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .clickable {
-                        scope.launch {
-                            navController.navigate(calendar.route) {
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                            drawerState.close()
-                        }
-                    }
-
-            ) {
-                Icon(
-                    imageVector = calendar.icon,
-                    contentDescription = calendar.title,
-                    modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp)
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = calendar.title,
-                    modifier = Modifier.padding(end = 16.dp)
-                )
-            }
-        }
-
-        Box(Modifier.background(if (currentDestination == "bin") Color.LightGray else Color.White).width(220.dp)) {
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .clickable {
-                        scope.launch {
-                            navController.navigate(bin.route) {
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                            drawerState.close()
-                        }
-                    }
-
-            ) {
-                Icon(
-                    imageVector = bin.icon,
-                    contentDescription = bin.title,
-                    modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp)
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = bin.title,
-                    modifier = Modifier.padding(end = 16.dp)
-                )
-            }
+        ) {
+            Icon(
+                imageVector = navigationItem.icon,
+                contentDescription = navigationItem.route,
+                modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                text = navigationItem.route,
+                modifier = Modifier.padding(end = 16.dp)
+            )
         }
     }
 }
@@ -310,7 +224,6 @@ fun getCurrentRoute(navController: NavHostController): String? {
     return navBackStackEntry?.destination?.route
 }
 
-
 @Composable
 fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
@@ -318,25 +231,18 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
         startDestination = NavigationItem.Home.route,
         modifier = modifier
     ) {
-        composable(NavigationItem.Home.route) { HomeScreen() }
-        composable(NavigationItem.Shopping.route) { ShoppingCart() }
-        composable(NavigationItem.Favorites.route) { FavoritesScreen() }
-        composable(NavigationItem.Calendar.route) { CalendarScreen() }
-        composable(NavigationItem.Bin.route) { BinScreen() }
+        composable(NavigationItem.Home.route) { ContentScreen(NavigationItem.Home.route) }
+        composable(NavigationItem.Shopping.route) { ContentScreen(NavigationItem.Shopping.route) }
+        composable(NavigationItem.Favorites.route) { ContentScreen(NavigationItem.Favorites.route) }
+        composable(NavigationItem.Calendar.route) { ContentScreen(NavigationItem.Calendar.route) }
+        composable(NavigationItem.Bin.route) { ContentScreen(NavigationItem.Bin.route) }
     }
 }
-//
 
-//
-
-//
-//    @Preview(showBackground = true)
-//    @Composable
-//    fun MyAppPreview() {
-//        NavigationDrawerTheme {
-//            MainScreen()
-//        }
-//    }
-//
-//
-
+@Preview(showBackground = true)
+@Composable
+fun MyAppPreview() {
+    NavigationDrawerTheme {
+        MainScreen()
+    }
+}

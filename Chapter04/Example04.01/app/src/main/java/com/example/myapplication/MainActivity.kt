@@ -69,21 +69,22 @@ fun MyScaffoldApp() {
                     textAlign = TextAlign.Center
                 )
             }
+        },
+        content = { innerPadding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "BODY CONTENT",
+                    modifier = Modifier.padding(16.dp),
+                    textAlign = TextAlign.Center
+                )
+            }
         }
-    ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "BODY CONTENT",
-                modifier = Modifier.padding(16.dp),
-                textAlign = TextAlign.Center
-            )
-        }
-    }
+    )
 }
 
 @Preview(showBackground = true)
