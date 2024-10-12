@@ -9,36 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HomeScreen() {
+fun ContentScreen(name: String) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Home Screen", fontSize = 28.sp)
-    }
-}
-
-@Composable
-fun ShoppingCart() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Shopping Cart Screen", fontSize = 28.sp)
-    }
-}
-
-@Composable
-fun FavoritesScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Favorites Screen", fontSize = 28.sp)
-    }
-}
-
-@Composable
-fun CalendarScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Calendar Screen", fontSize = 28.sp)
-    }
-}
-
-@Composable
-fun BinScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Bin Screen", fontSize = 28.sp)
+        Text(name, fontSize = 28.sp)
     }
 }

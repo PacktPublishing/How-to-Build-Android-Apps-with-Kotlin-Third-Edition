@@ -28,9 +28,9 @@ fun NavigationApp() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Routes.Home.route) {
         composable(Routes.Home.route) { HomeScreen(navController) }
-        composable(Routes.Red.route) { ColorScreen(navController, Routes.Red.route, Color.Red) }
-        composable(Routes.Green.route) { ColorScreen(navController, "Green", Color.Green) }
-        composable(Routes.Blue.route) { ColorScreen(navController, "Blue", Color.Blue) }
+        composable(Routes.Red.route) { ColorScreen(navController, "RED", Color.Red) }
+        composable(Routes.Green.route) { ColorScreen(navController, "GREEN", Color.Green) }
+        composable(Routes.Blue.route) { ColorScreen(navController, "BLUE", Color.Blue) }
     }
 }
 
