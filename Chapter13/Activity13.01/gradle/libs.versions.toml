@@ -11,11 +11,9 @@ composeBom = "2024.04.01"
 ksp = "1.9.20-1.0.14"
 hilt = "2.49"
 viewModelCompose = "2.6.1"
-room = "2.6.1"
 retrofit="2.9.0"
 retrofitGson="2.6.2"
 gson="2.9.0"
-dataStore="1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
