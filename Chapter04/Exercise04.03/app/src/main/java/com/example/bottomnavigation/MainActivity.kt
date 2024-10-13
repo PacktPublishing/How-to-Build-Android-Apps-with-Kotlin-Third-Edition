@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BottomNavigationTheme {
-                BottomNavScreen()
+                MainScreen()
             }
         }
     }
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomNavScreen() {
+fun MainScreen() {
     val navController = rememberNavController()
 
     Scaffold(
@@ -70,15 +70,10 @@ fun BottomNavigationBar(navController: NavHostController) {
     ) {
         items.forEach { item ->
             NavigationBarItem(
-                icon = { Icon(item.icon, contentDescription = item.title) },
-                label = { Text(item.title) },
+                icon = { Icon(item.icon, contentDescription = item.route) },
+                label = { Text(item.route) },
                 selected = currentRoute == item.route,
-                onClick = {
-                    navController.navigate(item.route) {
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
+                onClick = {navController.navigate(item.route) }
             )
         }
     }
@@ -86,12 +81,16 @@ fun BottomNavigationBar(navController: NavHostController) {
 
 @Composable
 fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController = navController, startDestination = NavigationItem.Home.route, modifier = modifier) {
-        composable(NavigationItem.Home.route) { HomeScreen() }
-        composable(NavigationItem.Shopping.route) { ShoppingCartScreen() }
-        composable(NavigationItem.Favorites.route) { FavoritesScreen() }
-        composable(NavigationItem.Calendar.route) { CalendarScreen() }
-        composable(NavigationItem.Bin.route) { BinScreen() }
+    NavHost(
+        navController = navController,
+        startDestination = NavigationItem.Home.route,
+        modifier = modifier
+    ) {
+        composable(NavigationItem.Home.route) { ContentScreen(NavigationItem.Home.route) }
+        composable(NavigationItem.Shopping.route) { ContentScreen(NavigationItem.Shopping.route) }
+        composable(NavigationItem.Favorites.route) { ContentScreen(NavigationItem.Favorites.route) }
+        composable(NavigationItem.Calendar.route) { ContentScreen(NavigationItem.Calendar.route) }
+        composable(NavigationItem.Bin.route) { ContentScreen(NavigationItem.Bin.route) }
     }
 }
 
@@ -99,6 +98,6 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
 @Composable
 fun BottomNavPreview() {
     BottomNavigationTheme {
-        BottomNavScreen()
+        MainScreen()
     }
 }
