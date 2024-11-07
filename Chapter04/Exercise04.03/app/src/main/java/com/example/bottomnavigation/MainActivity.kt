@@ -35,23 +35,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-
-    Scaffold(
-        topBar = {
-            TopAppBar( modifier = Modifier.fillMaxWidth(),
-                title = { Text("Tab Navigation", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth()) }
-            )
-        },
-        bottomBar = { BottomNavigationBar(navController) }
-    ) { paddingValues ->
-        NavigationHost(navController, modifier = Modifier.padding(paddingValues))
-    }
-}
-
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(

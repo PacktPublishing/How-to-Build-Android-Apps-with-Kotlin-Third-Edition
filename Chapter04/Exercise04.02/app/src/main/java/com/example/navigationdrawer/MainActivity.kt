@@ -1,6 +1,5 @@
 package com.example.navigationdrawer
 
-import NavigationItem
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -55,62 +54,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MainScreen() {
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-    val navController = rememberNavController()
-    val currentScreenTitle = remember { mutableStateOf("") }
-
-    navController.addOnDestinationChangedListener { _, destination, _ ->
-        currentScreenTitle.value = when (destination.route) {
-            NavigationItem.Home.route -> "Home"
-            NavigationItem.Shopping.route -> "Shopping Cart"
-            NavigationItem.Favorites.route -> "Favorites"
-            NavigationItem.Calendar.route -> "Calendar"
-            NavigationItem.Bin.route -> "Bin"
-            else -> "Navigation Drawer Example"
-        }
-    }
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        modifier = Modifier.fillMaxSize(),
-        drawerContent = {
-            DrawerContent(navController, drawerState, scope)
-        },
-        content = {
-            Scaffold(
-                topBar = {
-                    CenterAlignedTopAppBar(
-                        title = { Text(currentScreenTitle.value, fontSize = 30.sp) },
-                        navigationIcon = {
-                            IconButton(
-                                onClick = {
-                                    scope.launch {
-                                        if (drawerState.isClosed) drawerState.open() else drawerState.close()
-                                    }
-                                }
-                            ) {
-                                Icon(Icons.Default.Menu, contentDescription = "Menu")
-                            }
-                        }
-                    )
-                },
-                modifier = Modifier.fillMaxSize() // Ensure Scaffold takes up the full space
-            ) { paddingValues ->
-                NavigationHost(
-                    navController,
-                    modifier = Modifier
-                        .padding(paddingValues)
-                        .fillMaxSize()
-                )
-            }
-        }
-    )
 }
 
 @Composable
